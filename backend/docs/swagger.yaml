@@ -1,0 +1,282 @@
+openapi: 3.0.0
+info:
+  title: Spotplay
+  description: 'Es una plataforma de musica y mas ...'
+  contact:
+    email: suport@spotplay.com
+  license:
+    name: Apache 2.0
+    url: http://apac.....
+  version: 1.0.0
+servers:
+- url: http://localhost:4000/api/v1
+tags:
+- name: Song
+  description: canciones de la aplicacion
+- name: User
+  description: usuarios de la plataforma
+- name: Playlist
+  description: playlist de usuarios
+- name: Role
+  description: El rol de los dos tipos de usuarios
+components:
+  schemas:
+    Song:
+      type: object
+      properties:
+        title:
+          type: string
+        uri:
+          type: string
+        duration:
+          type: string
+        anio:
+          type: interger
+          format: int32
+        image: 
+          type: string
+        idArtist:
+          type: integer
+          format: int32
+        idGenero:
+          type: integer
+          format: int32
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    Playlist:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        userId:
+          type: interger
+          format: int32
+    Role:
+      type: object
+      properties:
+        name:
+          type: string
+paths:
+  /user/singup:
+    post:
+      tags:
+      - User
+      summary: crear un usuario
+      operantionId: createUser
+      description: Se creara un usuario para  utilizarlo en la apliacion.
+      requestBody:
+        description: ingrese los datos del usuario a crear.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        200:
+          description: registro exitoso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: bad request
+          content: {}
+        404:
+          description: not found
+          content: {}
+    x-codegen-request-body-name: body
+  /user:
+    get:
+      tags:
+      - User
+      summary: Obtener los usuarios
+      operantionId: getUsers
+      description: Se listaran los usuarios.
+      responses:
+        200:
+          description: registros listados!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: bad request
+          content: {}
+        404:
+          description: not found
+          content: {}
+    x-codegen-request-body-name: body
+  /song:
+    post:
+      tags:
+      - Song
+      summary: registrar una cancion
+      operantionId: createSong
+      description: Se creara una cancion para  utilizarlo en la apliacion.
+      requestBody:
+        description: ingrese los datos de la cancion
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Song'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Song'
+        required: true
+      responses:
+        200:
+          description: registro exitoso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Song'
+        400:
+          description: bad request
+          content: {}
+        404:
+          description: not found
+          content: {}
+    x-codegen-request-body-name: body
+  /song:
+    get:
+      tags:
+      - Song
+      summary: Obtener las songs
+      operantionId: getUsers
+      description: Se listaran las songs.
+      responses:
+        200:
+          description: registros listados!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Song'
+        400:
+          description: bad request
+          content: {}
+        404:
+          description: not found
+          content: {}
+    x-codegen-request-body-name: body
+  /playlist:
+    post:
+      tags:
+      - Playlist
+      summary: registrar una cancion
+      operantionId: createSong
+      description: Se creara una cancion para  utilizarlo en la apliacion.
+      requestBody:
+        description: ingrese los datos de la cancion
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Playlist'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Playlist'
+        required: true
+      responses:
+        200:
+          description: registro exitoso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playlist'
+        400:
+          description: bad request
+          content: {}
+        404:
+          description: not found
+          content: {}
+    x-codegen-request-body-name: body
+  /playlist:
+    get:
+      tags:
+      - Playlist
+      summary: Obtener las canciones
+      operantionId: getPlaylist
+      description: Se listaran las playlist.
+      responses:
+        200:
+          description: registros listados!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playlist'
+        400:
+          description: bad request
+          content: {}
+        404:
+          description: not found
+          content: {}
+    x-codegen-request-body-name: body
+    /role:
+      post:
+        tags:
+        - Role
+        summary: registrar un role
+        operantionId: createRole
+        description: Se creara un role para  utilizarlo en la apliacion.
+        requestBody:
+          description: ingrese los datos del tipo de rol
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Role'
+          required: true
+        responses:
+          200:
+            description: registro exitoso!
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Role'
+          400:
+            description: bad request
+            content: {}
+          404:
+            description: not found
+            content: {}
+    x-codegen-request-body-name: body
+  /role:
+    get:
+      tags:
+      - Role
+      summary: Obtener los rol
+      operantionId: getRole
+      description: Se listaran las rol.
+      responses:
+        200:
+          description: registros listados!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+        400:
+          description: bad request
+          content: {}
+        404:
+          description: not found
+          content: {}
+    x-codegen-request-body-name: body
+    
+  
+
+        
+          
+  
