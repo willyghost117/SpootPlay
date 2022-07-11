@@ -17,9 +17,13 @@ export default class UserRouter {
 
   async handleSingUp (req, res) {
     const result = await this._ctrl.createNewUser(req.body)
+    const body = req.body
+    const email = body._email
+    console.log(email)
     // if (result) {
     //   await this._response.error(req, res, result, 201)
     // }
+    await this._ctrl.mail(body.email)
     this._response.success(req, res, result, this._httpCode.Ok)
   }
 

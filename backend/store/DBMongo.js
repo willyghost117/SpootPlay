@@ -4,7 +4,7 @@ import { config } from '../config/default.js'
 
 const mongodb = async () => {
   try {
-    console.log('entre')
+  //  console.log('entre')
     const db = await mongoose.connect(config.mongo.uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true
@@ -28,7 +28,7 @@ export class DBMongo {
     console.log(data)
     const newModel = this._models[table](data)
     await newModel.save()
-    return 'Registrado'
+    return `create new item of ${table} successfully`
     // const newUser = userModel(data)
     // const res = await newUser.save()
     // console.log(res)
@@ -43,17 +43,17 @@ export class DBMongo {
   }
 
   async delete (table, id) {
-    console.log(id)
-    console.log(table)
+    // console.log(id)
+    // console.log(table)
     // const newModel = this._models[table]
     const res = await this._models[table].findByIdAndDelete(id)
     return res
   }
 
   async update (table, data, id) {
-    console.log(id)
-    console.log('esto es update en DBMongo')
-    console.log(data)
+    // console.log(id)
+    // console.log('esto es update en DBMongo')
+    // console.log(data)
     const res = await this._models[table].findByIdAndUpdate(id, data)
     return res
   }

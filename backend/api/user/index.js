@@ -8,10 +8,12 @@ import { helpers } from '../lib/helpers.js'
 import { response } from '../../response/response.js'
 import { HttpCode } from '../../response/httpcode.js'
 import { validateCreteUser } from './validate.js'
+import { transporter } from '../../config/mailer.js'
+
 export const userModule = (expressRouter) => {
   // const userServices = new DataJson()
   const userServices = new DBMongo()
-  const userController = new UserController(userServices, User, User1, helpers.escryptPassword)
+  const userController = new UserController(userServices, User, User1, helpers.escryptPassword, transporter)
   const userRouter = new UserRouter(expressRouter, userController, response, HttpCode, validateCreteUser)
   return userRouter._router
 }
